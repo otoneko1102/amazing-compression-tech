@@ -19,7 +19,7 @@ export const translations = {
     notSupported: "Please upload an image, video, or audio file.",
     notSupportedIcon: "warning",
     elapsed: "Time",
-    ratio: "Compression ratio",
+    ratio: "Ratio",
     savings: "Space saved",
     savingsLabel: "Space saved:",
     pageNotFound: "Page Not Found",

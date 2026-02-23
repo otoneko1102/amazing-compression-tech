@@ -23,4 +23,4 @@ https://otoneko1102.github.io/amazing-compression-tech/
 
 ## 関連
 
-t3tra-dev/zerocast: https://github.com/t3tra-dev/zerocast
+CLI: [t3tra-dev/zerocast](https://github.com/t3tra-dev/zerocast)
