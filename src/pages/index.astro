@@ -248,7 +248,13 @@ import { translations } from "../lib/i18n";
         width: 40px;
         height: 40px;
         font-size: 22px;
-        display: flex !important;
+        font-family: "Material Symbols Outlined";
+        font-weight: normal;
+        font-style: normal;
+        -webkit-font-feature-settings: "liga";
+        font-feature-settings: "liga";
+        -webkit-font-smoothing: antialiased;
+        display: none;
         align-items: center;
         justify-content: center;
         background: var(--subtle);
@@ -257,6 +263,9 @@ import { translations } from "../lib/i18n";
         color: var(--muted);
         flex-shrink: 0;
         vertical-align: 0;
+      }
+      .preview-icon.visible {
+        display: flex;
       }
       .file-meta {
         flex: 1;
@@ -671,11 +680,7 @@ import { translations } from "../lib/i18n";
 
       <div id="filePreview" class="file-preview" style="display:none">
         <img id="previewImg" alt="" />
-        <span
-          id="previewIcon"
-          class="ms preview-icon"
-          aria-hidden="true"
-          style="display:none"></span>
+        <span id="previewIcon" class="preview-icon" aria-hidden="true"></span>
         <div class="file-meta">
           <span id="previewName" class="file-name"></span>
           <span id="previewType" class="file-type"></span>
@@ -968,14 +973,14 @@ import { translations } from "../lib/i18n";
           if (file.type.startsWith("image/")) {
             img.src = URL.createObjectURL(file);
             img.style.display = "block";
-            icon.style.display = "none";
+            icon.classList.remove("visible");
           } else {
             img.src = "";
             img.style.display = "none";
             icon.textContent = file.type.startsWith("video/")
               ? "videocam"
               : "music_note";
-            icon.style.display = "flex";
+            icon.classList.add("visible");
           }
           preview.style.display = "flex";
 
