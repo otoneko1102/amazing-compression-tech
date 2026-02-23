@@ -216,6 +216,20 @@ import { translations } from "../lib/i18n";
         flex-shrink: 0;
         display: block;
       }
+      .preview-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: var(--subtle);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        color: var(--muted);
+        flex-shrink: 0;
+        vertical-align: 0;
+      }
       .file-meta {
         flex: 1;
         min-width: 0;
@@ -612,10 +626,11 @@ import { translations } from "../lib/i18n";
           >PNG · JPEG · GIF · WebP · and more</span
         >
       </label>
-      <input type="file" id="fileInput" accept="image/*" />
+      <input type="file" id="fileInput" accept="image/*,video/*,audio/*" />
 
       <div id="filePreview" class="file-preview" style="display:none">
         <img id="previewImg" alt="" />
+        <span id="previewIcon" class="ms preview-icon" aria-hidden="true" style="display:none"></span>
         <div class="file-meta">
           <span id="previewName" class="file-name"></span>
           <span id="previewType" class="file-type"></span>
@@ -836,7 +851,7 @@ import { translations } from "../lib/i18n";
           var errorMsg = document.getElementById("errorMsg");
           errorMsg.style.display = "none";
 
-          if (!file.type.startsWith("image/")) {
+          if (!file.type.startsWith("image/") && !file.type.startsWith("video/") && !file.type.startsWith("audio/")) {
             document.getElementById("errorText").textContent = t.notSupported;
             errorMsg.style.display = "block";
             document.getElementById("result").style.display = "none";
@@ -844,10 +859,21 @@ import { translations } from "../lib/i18n";
           }
 
           var preview = document.getElementById("filePreview");
+          var img = document.getElementById("previewImg");
+          var icon = document.getElementById("previewIcon");
           document.getElementById("previewName").textContent = file.name;
           document.getElementById("previewType").textContent =
             file.type + " · " + fmt(file.size);
-          document.getElementById("previewImg").src = URL.createObjectURL(file);
+          if (file.type.startsWith("image/")) {
+            img.src = URL.createObjectURL(file);
+            img.style.display = "block";
+            icon.style.display = "none";
+          } else {
+            img.src = "";
+            img.style.display = "none";
+            icon.textContent = file.type.startsWith("video/") ? "videocam" : "music_note";
+            icon.style.display = "flex";
+          }
           preview.style.display = "flex";
 
           document.getElementById("result").style.display = "block";
