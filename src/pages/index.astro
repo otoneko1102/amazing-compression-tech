@@ -332,7 +332,7 @@ import { translations } from "../lib/i18n";
 
       .stat-strip {
         display: grid;
-        grid-template-columns: 1fr 1px 1fr 1px 1fr;
+        grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
         background: var(--border2);
         border: 1px solid var(--border);
         border-radius: 8px;
@@ -561,11 +561,14 @@ import { translations } from "../lib/i18n";
         .stat-strip {
           gap: 0;
         }
+        .stat-cell {
+          padding: 0.6rem 0.25rem;
+        }
         .stat-val {
-          font-size: 0.78rem;
+          font-size: 0.72rem;
         }
         .stat-lbl {
-          font-size: 0.55rem;
+          font-size: 0.5rem;
         }
         .chart-row {
           flex-direction: column;
@@ -668,7 +671,7 @@ import { translations } from "../lib/i18n";
 
         <!-- phase 3: done -->
         <div id="phaseDone" class="phase">
-          <!-- 3-stat strip: before / after / saved -->
+          <!-- 3-stat strip: before / after / saved / time -->
           <div class="stat-strip">
             <div class="stat-cell">
               <span class="stat-lbl" data-i18n="before">Before</span>
@@ -683,6 +686,11 @@ import { translations } from "../lib/i18n";
             <div class="stat-cell">
               <span class="stat-lbl" data-i18n="savings">Saved</span>
               <span class="stat-val hi" id="savingsVal">—</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="stat-cell">
+              <span class="stat-lbl" data-i18n="elapsed">Time</span>
+              <span class="stat-val" id="elapsedVal">—</span>
             </div>
           </div>
 
@@ -879,6 +887,7 @@ import { translations } from "../lib/i18n";
           document.getElementById("result").style.display = "block";
 
           showPhase("phaseAnalyzing");
+          var _startTime = performance.now();
 
           setTimeout(function () {
             showPhase("phaseCompressing");
@@ -895,6 +904,15 @@ import { translations } from "../lib/i18n";
 
             setTimeout(function () {
               updateSizeLabels(file.size);
+
+              var elapsed = performance.now() - _startTime;
+              var ev = document.getElementById("elapsedVal");
+              if (ev) {
+                ev.textContent =
+                  elapsed < 1000
+                    ? Math.round(elapsed) + " ms"
+                    : (elapsed / 1000).toFixed(2) + " s";
+              }
 
               showPhase("phaseDone");
               applyT();
