@@ -8,7 +8,35 @@ import { translations } from "../lib/i18n";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <title>Amazing Compression Tech</title>
+
+    <title>Amazing Compression</title>
+    <meta
+      name="description"
+      content="Oh, amazing compression technology. Achieves 100% size compression for any file."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Amazing Compression" />
+    <meta property="og:title" content="Amazing Compression" />
+    <meta
+      property="og:description"
+      content="Oh, amazing compression technology. Achieves 100% size compression for any file."
+    />
+    <meta
+      property="og:url"
+      content="https://otoneko1102.github.io/amazing-compression-tech/"
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Amazing Compression" />
+    <meta
+      name="twitter:description"
+      content="Oh, amazing compression technology. Achieves 100% size compression for any file."
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -633,7 +661,11 @@ import { translations } from "../lib/i18n";
 
       <div id="filePreview" class="file-preview" style="display:none">
         <img id="previewImg" alt="" />
-        <span id="previewIcon" class="ms preview-icon" aria-hidden="true" style="display:none"></span>
+        <span
+          id="previewIcon"
+          class="ms preview-icon"
+          aria-hidden="true"
+          style="display:none"></span>
         <div class="file-meta">
           <span id="previewName" class="file-name"></span>
           <span id="previewType" class="file-type"></span>
@@ -747,71 +779,17 @@ import { translations } from "../lib/i18n";
       </div><!-- #result -->
     </div><!-- .card -->
 
+    <script is:inline src={`${import.meta.env.BASE_URL}engine.js`}></script>
+
     <script is:inline>
+      /* ── Animation orchestrator (compress.js) ── */
       (function () {
-        var t = window.__t;
-        var locale = window.__locale;
-
-        function fmt(n) {
-          if (n < 1024) return n + " B";
-          if (n < 1048576) return (n / 1024).toFixed(1) + " KB";
-          return (n / 1048576).toFixed(2) + " MB";
-        }
-
-        function applyT() {
-          document.querySelectorAll("[data-i18n]").forEach(function (el) {
-            var k = el.getAttribute("data-i18n");
-            if (t[k] !== undefined) el.textContent = t[k];
-          });
-          document.title = t.title;
-          document.querySelectorAll(".lang-btn").forEach(function (btn) {
-            var active = btn.getAttribute("data-lang") === locale;
-            btn.setAttribute("aria-pressed", String(active));
-            btn.classList.toggle("active", active);
-          });
-        }
-
-        document.querySelectorAll(".lang-btn").forEach(function (btn) {
-          btn.addEventListener("click", function () {
-            var l = btn.getAttribute("data-lang");
-            try {
-              localStorage.setItem("act-lang", l);
-            } catch (e) {}
-            window.__locale = l;
-            window.__t = l === "ja" ? window.__ja : window.__en;
-            t = window.__t;
-            locale = l;
-            document.documentElement.lang = l;
-            document.documentElement.setAttribute("data-locale", l);
-            applyT();
-            if (_currentFile) updateSizeLabels(_currentFile.size);
-          });
-        });
-
-        applyT();
-
-        var _currentFile = null;
-
-        /*
-        showPhase — zero-flash phase switching
-        Pattern:
-          1. Hide all phases (display:none).
-          2. Reset animated values while hidden
-             (browser ignores transitions on hidden els → instant reset).
-          3. Show target (display:flex via .vis class).
-          4. Caller calls forceReflow() immediately after to commit
-             the reset values as the painted "from" state.
-          5. Caller then sets transition + new values → animates.
-        This way the element NEVER appears in an intermediate state.
-      */
         function showPhase(id) {
           ["phaseAnalyzing", "phaseCompressing", "phaseDone"].forEach(
             function (pid) {
-              var el = document.getElementById(pid);
-              el.classList.remove("vis");
+              document.getElementById(pid).classList.remove("vis");
             },
           );
-
           if (id === "phaseDone") {
             var df = document.getElementById("donutFill");
             if (df) {
@@ -836,7 +814,6 @@ import { translations } from "../lib/i18n";
               pb.style.width = "0";
             }
           }
-
           document.getElementById(id).classList.add("vis");
         }
 
@@ -844,7 +821,7 @@ import { translations } from "../lib/i18n";
           void (el || document.body).getBoundingClientRect();
         }
 
-        function updateSizeLabels(bytes) {
+        function updateSizeLabels(bytes, fmt) {
           var sbl = document.getElementById("sizeBeforeLabel");
           if (sbl) sbl.textContent = fmt(bytes);
           var bbl = document.getElementById("barBeforeLabel");
@@ -853,13 +830,115 @@ import { translations } from "../lib/i18n";
           if (sv) sv.textContent = fmt(bytes);
         }
 
-        function handleFile(file) {
-          _currentFile = file;
+        window.runCompression = function (file, fmt) {
+          var startTime = performance.now();
+          showPhase("phaseAnalyzing");
 
+          setTimeout(function () {
+            showPhase("phaseCompressing");
+            var pctEl = document.getElementById("progressPct");
+            var pb = document.getElementById("progressBar");
+            pctEl.textContent = "0%";
+
+            forceReflow(pb);
+            pb.style.transition = "width 0.85s cubic-bezier(0.4,0,0.2,1)";
+            pb.style.width = "100%";
+            setTimeout(function () {
+              pctEl.textContent = "100%";
+            }, 850);
+
+            setTimeout(function () {
+              updateSizeLabels(file.size, fmt);
+
+              var elapsed = performance.now() - startTime;
+              var ev = document.getElementById("elapsedVal");
+              if (ev) {
+                ev.textContent =
+                  elapsed < 1000
+                    ? Math.round(elapsed) + " ms"
+                    : (elapsed / 1000).toFixed(2) + " s";
+              }
+
+              showPhase("phaseDone");
+              if (typeof window.applyT === "function") window.applyT();
+
+              var df2 = document.getElementById("donutFill");
+              var bb2 = document.getElementById("barBefore");
+              forceReflow(document.getElementById("phaseDone"));
+              if (df2) {
+                df2.style.transition =
+                  "stroke-dashoffset 0.85s cubic-bezier(0.4,0,0.2,1)";
+                df2.style.strokeDashoffset = "0";
+              }
+              if (bb2) {
+                bb2.style.transition = "width 0.85s cubic-bezier(0.4,0,0.2,1)";
+                bb2.style.width = "100%";
+              }
+
+              var result = window.compressFile(file);
+              var dl = document.getElementById("downloadBtn");
+              dl.href = URL.createObjectURL(result.blob);
+              dl.download = result.filename;
+            }, 950);
+          }, 480);
+        };
+      })();
+    </script>
+
+    <script is:inline>
+      /* ── i18n · UI · file handling (app.js) ── */
+      (function () {
+        var t = window.__t;
+        var locale = window.__locale;
+
+        function fmt(n) {
+          if (n < 1024) return n + " B";
+          if (n < 1048576) return (n / 1024).toFixed(1) + " KB";
+          return (n / 1048576).toFixed(2) + " MB";
+        }
+
+        function applyT() {
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            var k = el.getAttribute("data-i18n");
+            if (t[k] !== undefined) el.textContent = t[k];
+          });
+          document.title = t.title;
+          document.querySelectorAll(".lang-btn").forEach(function (btn) {
+            var active = btn.getAttribute("data-lang") === locale;
+            btn.setAttribute("aria-pressed", String(active));
+            btn.classList.toggle("active", active);
+          });
+        }
+
+        window.applyT = applyT;
+
+        document.querySelectorAll(".lang-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var l = btn.getAttribute("data-lang");
+            try {
+              localStorage.setItem("act-lang", l);
+            } catch (e) {}
+            window.__locale = l;
+            window.__t = l === "ja" ? window.__ja : window.__en;
+            t = window.__t;
+            locale = l;
+            document.documentElement.lang = l;
+            document.documentElement.setAttribute("data-locale", l);
+            applyT();
+          });
+        });
+
+        applyT();
+
+        function handleFile(file) {
           var errorMsg = document.getElementById("errorMsg");
           errorMsg.style.display = "none";
 
-          if (!file.type.startsWith("image/") && !file.type.startsWith("video/") && !file.type.startsWith("audio/")) {
+          if (
+            !file.type.startsWith("image/") &&
+            !file.type.startsWith("video/") &&
+            !file.type.startsWith("audio/")
+          ) {
             document.getElementById("errorText").textContent = t.notSupported;
             errorMsg.style.display = "block";
             document.getElementById("result").style.display = "none";
@@ -879,64 +958,15 @@ import { translations } from "../lib/i18n";
           } else {
             img.src = "";
             img.style.display = "none";
-            icon.textContent = file.type.startsWith("video/") ? "videocam" : "music_note";
+            icon.textContent = file.type.startsWith("video/")
+              ? "videocam"
+              : "music_note";
             icon.style.display = "flex";
           }
           preview.style.display = "flex";
 
           document.getElementById("result").style.display = "block";
-
-          showPhase("phaseAnalyzing");
-          var _startTime = performance.now();
-
-          setTimeout(function () {
-            showPhase("phaseCompressing");
-            var pctEl = document.getElementById("progressPct");
-            var pb = document.getElementById("progressBar");
-            pctEl.textContent = "0%";
-
-            forceReflow(pb);
-            pb.style.transition = "width 0.85s cubic-bezier(0.4,0,0.2,1)";
-            pb.style.width = "100%";
-            setTimeout(function () {
-              pctEl.textContent = "100%";
-            }, 850);
-
-            setTimeout(function () {
-              updateSizeLabels(file.size);
-
-              var elapsed = performance.now() - _startTime;
-              var ev = document.getElementById("elapsedVal");
-              if (ev) {
-                ev.textContent =
-                  elapsed < 1000
-                    ? Math.round(elapsed) + " ms"
-                    : (elapsed / 1000).toFixed(2) + " s";
-              }
-
-              showPhase("phaseDone");
-              applyT();
-
-              var df2 = document.getElementById("donutFill");
-              var bb2 = document.getElementById("barBefore");
-              forceReflow(document.getElementById("phaseDone"));
-              if (df2) {
-                df2.style.transition =
-                  "stroke-dashoffset 0.85s cubic-bezier(0.4,0,0.2,1)";
-                df2.style.strokeDashoffset = "0";
-              }
-              if (bb2) {
-                bb2.style.transition = "width 0.85s cubic-bezier(0.4,0,0.2,1)";
-                bb2.style.width = "100%";
-              }
-
-              var blob = new Blob([], { type: file.type });
-              var dl = document.getElementById("downloadBtn");
-              var rand6 = Math.random().toString(36).slice(2, 8);
-              dl.href = URL.createObjectURL(blob);
-              dl.download = "amazing-" + rand6 + "_" + file.name;
-            }, 950);
-          }, 480);
+          window.runCompression(file, fmt);
         }
 
         document
