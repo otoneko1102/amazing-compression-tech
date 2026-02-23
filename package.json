@@ -7,7 +7,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write ./src ./public/compression.js"
+    "format": "prettier --write ./src ./public/engine.js"
   },
   "dependencies": {
     "astro": "^5.17.1"

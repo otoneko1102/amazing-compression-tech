@@ -2,9 +2,10 @@ export type Locale = "en" | "ja";
 
 export const translations = {
   en: {
-    title: "Amazing Compression Tech",
+    title: "Amazing Compression",
     tagline: "The world's most advanced media compressor",
-    subtitle: "Drop any image, video, or audio. We compress it to the absolute limit.",
+    subtitle:
+      "Drop any image, video, or audio. We compress it to the absolute limit.",
     selectFile: "Click here or drag & drop a file",
     uploadHint: "Images · Videos · Audio files supported",
     analyzing: "Analyzing…",
@@ -27,7 +28,7 @@ export const translations = {
     bytes: "bytes",
   },
   ja: {
-    title: "驚異の圧縮技術",
+    title: "Amazing Compression",
     tagline: "世界最先端のメディア圧縮エンジン",
     subtitle: "画像・動画・音声をドロップするだけ。究極まで圧縮します。",
     selectFile: "クリックまたはドラッグ＆ドロップでファイルを選択",
