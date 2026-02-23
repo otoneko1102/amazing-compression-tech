@@ -1,0 +1,11 @@
+[package]
+name = "amazcomp-cli"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+chrono = "0.4.43"
+clap = { version = "4.5.60", features = ["derive"] }
+glob = "0.3.2"
+inline_colorization = "0.1.6"
+rand = "0.8.5"
