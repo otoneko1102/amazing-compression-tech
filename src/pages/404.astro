@@ -56,6 +56,6 @@ const t = translations[locale];
     <div class="code">404</div>
     <h1>{t.pageNotFound}</h1>
     <p>{t.pageNotFoundDesc}</p>
-    <a href="/">{t.goHome}</a>
+    <a href={import.meta.env.BASE_URL}>{t.goHome}</a>
   </body>
 </html>
