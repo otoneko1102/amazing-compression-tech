@@ -5,6 +5,7 @@ use rand::distributions::Alphanumeric;
 use rand::{Rng, thread_rng};
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::thread;
 use std::time::Duration;
 
@@ -30,6 +31,8 @@ enum Level {
     Error,
 }
 
+static VERBOSE_LOGGING: AtomicBool = AtomicBool::new(false);
+
 fn level_color(level: Level) -> &'static str {
     match level {
         Level::Debug => inline_colorization::color_blue,
@@ -51,6 +54,11 @@ fn now_timestamp() -> String {
 }
 
 fn log(level: Level, msg: impl AsRef<str>) {
+    let verbose = VERBOSE_LOGGING.load(Ordering::Relaxed);
+    if !verbose && !matches!(level, Level::Error) {
+        return;
+    }
+
     let color = level_color(level);
     let reset = inline_colorization::color_reset;
     let lvl = format!("{:<8}", level_name(level));
@@ -130,6 +138,8 @@ fn random_name_6() -> String {
 
 fn run() -> Result<(), String> {
     let args = Args::parse();
+    VERBOSE_LOGGING.store(args.verbose, Ordering::Relaxed);
+
     if args.verbose {
         log(Level::Info, "Loaded application.");
         log(Level::Info, "Parsed input.");
