@@ -16,7 +16,6 @@ import { translations } from "../lib/i18n";
     />
     <meta name="robots" content="index, follow" />
 
-    <!-- OGP -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Amazing Compression" />
     <meta property="og:title" content="Amazing Compression" />
@@ -29,7 +28,6 @@ import { translations } from "../lib/i18n";
       content="https://otoneko1102.github.io/amazing-compression-tech/"
     />
 
-    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Amazing Compression" />
     <meta
@@ -702,7 +700,8 @@ import { translations } from "../lib/i18n";
         Drop any image. We compress it to the absolute limit.
       </p>
       <p class="site-desc" data-i18n="description">
-        Oh, amazing compression technology. Achieves 100% size compression for any file.
+        Oh, amazing compression technology. Achieves 100% size compression for
+        any file.
       </p>
     </header>
 
@@ -748,7 +747,6 @@ import { translations } from "../lib/i18n";
       <div id="result" style="display:none; position:relative">
         <div class="divider"></div>
 
-        <!-- phase 1: analyzing -->
         <div id="phaseAnalyzing" class="phase">
           <div class="phase-row">
             <div class="spinner"></div>
@@ -756,7 +754,6 @@ import { translations } from "../lib/i18n";
           </div>
         </div>
 
-        <!-- phase 2: compressing -->
         <div id="phaseCompressing" class="phase">
           <div class="progress-header">
             <span class="progress-header-label" data-i18n="compressing"
@@ -769,9 +766,7 @@ import { translations } from "../lib/i18n";
           </div>
         </div>
 
-        <!-- phase 3: done -->
         <div id="phaseDone" class="phase">
-          <!-- 3-stat strip: before / after / saved / time -->
           <div class="stat-strip">
             <div class="stat-cell">
               <span class="stat-lbl" data-i18n="before">Before</span>
@@ -794,7 +789,6 @@ import { translations } from "../lib/i18n";
             </div>
           </div>
 
-          <!-- donut + bars -->
           <div class="chart-row">
             <div class="donut-wrap">
               <svg class="donut-svg" viewBox="0 0 88 88" aria-hidden="true">
@@ -846,12 +840,14 @@ import { translations } from "../lib/i18n";
             <span data-i18n="download">Download compressed file</span>
           </a>
         </div>
-      </div><!-- #result -->
-    </div><!-- .card -->
+      </div>
+    </div>
 
     <footer class="footer">
       <p class="footer-notice">
-        <span class="ms" aria-hidden="true">info</span><span data-i18n="jokeNotice">This is a parody tool. No actual compression is performed. Output files contain 0 bytes.</span>
+        <span class="ms" aria-hidden="true">info</span><span
+          data-i18n="jokeNotice">This is a joke tool.</span
+        >
       </p>
       <div class="footer-links">
         <a

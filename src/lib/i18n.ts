@@ -28,8 +28,7 @@ export const translations = {
     bytes: "bytes",
     description:
       "Oh, amazing compression technology. Achieves 100% size compression for any file.",
-    jokeNotice:
-      "This is a parody tool. No actual compression is performed. Output files contain 0 bytes.",
+    jokeNotice: "This is a joke tool.",
   },
   ja: {
     title: "Amazing Compression",
@@ -55,9 +54,9 @@ export const translations = {
     pageNotFoundDesc: "お探しのページは存在しません。",
     goHome: "← トップに戻る",
     bytes: "バイト",
-    description: "なんと、脅威の圧縮技術。どんなファイルでも100%のサイズ圧縮を実現。",
-    jokeNotice:
-      "これはジョークツールです。実際の圧縮処理は行われません。出力ファイルは 0 バイトです。",
+    description:
+      "なんと、脅威の圧縮技術。どんなファイルでも100%のサイズ圧縮を実現。",
+    jokeNotice: "これはジョークツールです。",
   },
 } as const;
 
