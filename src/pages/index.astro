@@ -133,6 +133,60 @@ import { translations } from "../lib/i18n";
         color: var(--muted);
       }
 
+      .site-desc {
+        font-size: 0.8rem;
+        color: var(--text);
+        margin-top: 0.35rem;
+        letter-spacing: -0.01em;
+      }
+
+      .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 0.55rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.18rem;
+        background: var(--bg);
+        border-top: 1px solid var(--border2);
+        z-index: 100;
+      }
+      .footer-notice {
+        font-size: 0.62rem;
+        color: var(--muted);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+      }
+      .footer-notice .ms {
+        font-size: 14px;
+        vertical-align: 0;
+        color: var(--muted);
+      }
+      .footer-links {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.62rem;
+        color: var(--muted);
+      }
+      .footer-link {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.12s;
+      }
+      .footer-link:hover {
+        color: var(--text);
+      }
+      .footer-sep {
+        color: var(--border);
+      }
+
       .lang-row {
         display: flex;
         gap: 2px;
@@ -651,6 +705,9 @@ import { translations } from "../lib/i18n";
       <p class="subtitle" data-i18n="subtitle">
         Drop any image. We compress it to the absolute limit.
       </p>
+      <p class="site-desc" data-i18n="description">
+        Oh, amazing compression technology. Achieves 100% size compression for any file.
+      </p>
     </header>
 
     <div class="card">
@@ -795,6 +852,22 @@ import { translations } from "../lib/i18n";
         </div>
       </div><!-- #result -->
     </div><!-- .card -->
+
+    <footer class="footer">
+      <p class="footer-notice">
+        <span class="ms" aria-hidden="true">info</span><span data-i18n="jokeNotice">This is a parody tool. No actual compression is performed. Output files contain 0 bytes.</span>
+      </p>
+      <div class="footer-links">
+        <a
+          class="footer-link"
+          href="https://github.com/otoneko1102/amazing-compression-tech"
+          target="_blank"
+          rel="noopener">GitHub</a
+        >
+        <span class="footer-sep">·</span>
+        <span>© 2026 otoneko.</span>
+      </div>
+    </footer>
 
     <script is:inline src={`${import.meta.env.BASE_URL}engine.js`}></script>
 
