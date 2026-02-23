@@ -1,5 +1,5 @@
 ﻿---
-import { translations } from '../lib/i18n';
+import { translations } from "../lib/i18n";
 ---
 
 <!doctype html>
@@ -20,42 +20,51 @@ import { translations } from '../lib/i18n';
       rel="stylesheet"
     />
 
-    <script is:inline define:vars={{ en: translations.en, ja: translations.ja }}>
+    <script is:inline define:vars={{ en: translations.en, ja: translations.ja }}
+    >
       window.__en = en;
       window.__ja = ja;
       var __loc = (function () {
         try {
-          var s = localStorage.getItem('act-lang');
-          if (s === 'ja' || s === 'en') return s;
+          var s = localStorage.getItem("act-lang");
+          if (s === "ja" || s === "en") return s;
         } catch (e) {}
-        return (navigator.language || '').toLowerCase().startsWith('ja') ? 'ja' : 'en';
+        return (navigator.language || "").toLowerCase().startsWith("ja")
+          ? "ja"
+          : "en";
       })();
       window.__locale = __loc;
-      window.__t = __loc === 'ja' ? ja : en;
+      window.__t = __loc === "ja" ? ja : en;
       document.documentElement.lang = __loc;
-      document.documentElement.setAttribute('data-locale', __loc);
+      document.documentElement.setAttribute("data-locale", __loc);
     </script>
 
     <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
       :root {
-        --bg:       #0c0c0c;
-        --surface:  #131313;
-        --border:   #242424;
-        --border2:  #1a1a1a;
-        --text:     #f0f0f0;
-        --muted:    #5a5a5a;
-        --subtle:   #2a2a2a;
-        --accent:   #c8ff00;
-        --accent-dim: rgba(200,255,0,0.09);
-        --red:      #ff4f4f;
-        --radius:   12px;
-        --card-w:   520px;
+        --bg: #0c0c0c;
+        --surface: #131313;
+        --border: #242424;
+        --border2: #1a1a1a;
+        --text: #f0f0f0;
+        --muted: #5a5a5a;
+        --subtle: #2a2a2a;
+        --accent: #c8ff00;
+        --accent-dim: rgba(200, 255, 0, 0.09);
+        --red: #ff4f4f;
+        --radius: 12px;
+        --card-w: 520px;
       }
 
       body {
-        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-family: "Space Grotesk", system-ui, sans-serif;
         background: var(--bg);
         color: var(--text);
         min-height: 100vh;
@@ -68,7 +77,6 @@ import { translations } from '../lib/i18n';
         -moz-osx-font-smoothing: grayscale;
       }
 
-      /* ── header ───────────────────────────────────── */
       .header {
         width: 100%;
         max-width: var(--card-w);
@@ -97,7 +105,6 @@ import { translations } from '../lib/i18n';
         color: var(--muted);
       }
 
-      /* ── lang switcher ────────────────────────────── */
       .lang-row {
         display: flex;
         gap: 2px;
@@ -118,14 +125,15 @@ import { translations } from '../lib/i18n';
         font-family: inherit;
         cursor: pointer;
         letter-spacing: 0.06em;
-        transition: background 0.12s, color 0.12s;
+        transition:
+          background 0.12s,
+          color 0.12s;
       }
       .lang-btn.active {
         background: var(--subtle);
         color: var(--text);
       }
 
-      /* ── card ─────────────────────────────────────── */
       .card {
         width: 100%;
         max-width: var(--card-w);
@@ -135,7 +143,6 @@ import { translations } from '../lib/i18n';
         padding: 1.25rem;
       }
 
-      /* ── dropzone ─────────────────────────────────── */
       .dropzone {
         display: flex;
         flex-direction: column;
@@ -148,7 +155,9 @@ import { translations } from '../lib/i18n';
         cursor: pointer;
         padding: 1.75rem 2rem;
         text-align: center;
-        transition: border-color 0.18s, background 0.18s;
+        transition:
+          border-color 0.18s,
+          background 0.18s;
         user-select: none;
         -webkit-user-select: none;
         position: relative;
@@ -159,12 +168,15 @@ import { translations } from '../lib/i18n';
         background: var(--accent-dim);
       }
       .dz-icon {
-        width: 32px; height: 32px;
+        width: 32px;
+        height: 32px;
         color: var(--muted);
         transition: color 0.18s;
       }
       .dropzone:hover .dz-icon,
-      .dropzone.over .dz-icon { color: var(--accent); }
+      .dropzone.over .dz-icon {
+        color: var(--accent);
+      }
       .dz-main {
         font-size: 0.875rem;
         font-weight: 600;
@@ -178,11 +190,13 @@ import { translations } from '../lib/i18n';
       }
       #fileInput {
         position: absolute;
-        width: 1px; height: 1px;
-        overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
       }
 
-      /* ── file preview ─────────────────────────────── */
       .file-preview {
         display: flex;
         align-items: center;
@@ -194,14 +208,18 @@ import { translations } from '../lib/i18n';
         border-radius: 8px;
       }
       .file-preview img {
-        width: 40px; height: 40px;
+        width: 40px;
+        height: 40px;
         object-fit: cover;
         border-radius: 5px;
         border: 1px solid var(--border);
         flex-shrink: 0;
         display: block;
       }
-      .file-meta { flex: 1; min-width: 0; }
+      .file-meta {
+        flex: 1;
+        min-width: 0;
+      }
       .file-name {
         display: block;
         font-size: 0.8rem;
@@ -217,54 +235,56 @@ import { translations } from '../lib/i18n';
         margin-top: 0.08rem;
       }
 
-      /* ── error ────────────────────────────────────── */
       .error-msg {
         margin-top: 0.65rem;
         padding: 0.6rem 0.75rem;
-        background: rgba(255,79,79,0.07);
-        border: 1px solid rgba(255,79,79,0.2);
+        background: rgba(255, 79, 79, 0.07);
+        border: 1px solid rgba(255, 79, 79, 0.2);
         border-radius: 7px;
         font-size: 0.78rem;
         color: var(--red);
       }
 
-      /* ── divider ──────────────────────────────────── */
       .divider {
         height: 1px;
         background: var(--border);
         margin: 1rem 0;
       }
 
-      /* ── phases ───────────────────────────────────── */
       .phase {
         display: none;
         flex-direction: column;
         align-items: stretch;
         gap: 0.65rem;
       }
-      .phase.vis { display: flex; }
+      .phase.vis {
+        display: flex;
+      }
 
-      /* analyzing */
       .phase-row {
         display: flex;
         align-items: center;
         gap: 0.55rem;
       }
       .spinner {
-        width: 14px; height: 14px;
+        width: 14px;
+        height: 14px;
         border: 1.5px solid var(--border);
         border-top-color: var(--text);
         border-radius: 50%;
         animation: spin 0.65s linear infinite;
         flex-shrink: 0;
       }
-      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
       .phase-label {
         font-size: 0.8rem;
         color: var(--muted);
       }
 
-      /* compressing */
       .progress-header {
         display: flex;
         justify-content: space-between;
@@ -294,11 +314,8 @@ import { translations } from '../lib/i18n';
         width: 0;
         background: var(--text);
         border-radius: 99px;
-        /* transition applied by JS */
       }
 
-      /* ── done panel ───────────────────────────────── */
-      /* stat strip */
       .stat-strip {
         display: grid;
         grid-template-columns: 1fr 1px 1fr 1px 1fr;
@@ -307,7 +324,9 @@ import { translations } from '../lib/i18n';
         border-radius: 8px;
         overflow: hidden;
       }
-      .stat-sep { background: var(--border); }
+      .stat-sep {
+        background: var(--border);
+      }
       .stat-cell {
         padding: 0.75rem 0.5rem;
         display: flex;
@@ -330,22 +349,27 @@ import { translations } from '../lib/i18n';
         letter-spacing: -0.02em;
         font-variant-numeric: tabular-nums;
       }
-      .stat-val.hi { color: var(--accent); }
+      .stat-val.hi {
+        color: var(--accent);
+      }
 
-      /* chart row: donut left, bars right */
       .chart-row {
         display: flex;
         align-items: center;
         gap: 1.1rem;
       }
 
-      /* donut */
       .donut-wrap {
         position: relative;
-        width: 88px; height: 88px;
+        width: 88px;
+        height: 88px;
         flex-shrink: 0;
       }
-      .donut-svg { width: 88px; height: 88px; transform: rotate(-90deg); }
+      .donut-svg {
+        width: 88px;
+        height: 88px;
+        transform: rotate(-90deg);
+      }
       .donut-bg {
         fill: none;
         stroke: var(--border);
@@ -356,15 +380,17 @@ import { translations } from '../lib/i18n';
         stroke: var(--accent);
         stroke-width: 7;
         stroke-linecap: round;
-        /* r=38 → circumference = 2π×38 ≈ 238.76 → use 239 */
+
         stroke-dasharray: 239;
         stroke-dashoffset: 239;
-        /* NO CSS transition here — applied by JS to avoid hidden-state glitch */
       }
       .donut-center {
-        position: absolute; inset: 0;
-        display: flex; flex-direction: column;
-        align-items: center; justify-content: center;
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         line-height: 1.1;
       }
       .donut-pct {
@@ -380,21 +406,27 @@ import { translations } from '../lib/i18n';
         letter-spacing: 0.07em;
       }
 
-      /* bars */
       .bars-section {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 0.6rem;
       }
-      .bar-row { display: flex; flex-direction: column; gap: 0.22rem; }
+      .bar-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.22rem;
+      }
       .bar-meta {
         display: flex;
         justify-content: space-between;
         font-size: 0.67rem;
         color: var(--muted);
       }
-      .bar-meta strong { color: var(--text); font-weight: 600; }
+      .bar-meta strong {
+        color: var(--text);
+        font-weight: 600;
+      }
       .bar-track {
         height: 4px;
         background: var(--border);
@@ -402,14 +434,17 @@ import { translations } from '../lib/i18n';
         overflow: hidden;
       }
       .bar-fill {
-        height: 100%; width: 0;
+        height: 100%;
+        width: 0;
         border-radius: 99px;
-        /* transition applied by JS */
       }
-      #barBefore { background: var(--muted); }
-      #barAfter  { background: var(--accent); }
+      #barBefore {
+        background: var(--muted);
+      }
+      #barAfter {
+        background: var(--accent);
+      }
 
-      /* completed message */
       .done-msg {
         font-size: 0.95rem;
         font-weight: 700;
@@ -418,7 +453,6 @@ import { translations } from '../lib/i18n';
         letter-spacing: -0.01em;
       }
 
-      /* download button */
       .download-btn {
         display: flex;
         align-items: center;
@@ -437,15 +471,21 @@ import { translations } from '../lib/i18n';
         cursor: pointer;
         text-decoration: none;
         text-align: center;
-        transition: opacity 0.14s, transform 0.12s;
+        transition:
+          opacity 0.14s,
+          transform 0.12s;
         flex-shrink: 0;
       }
-      .download-btn:hover { opacity: 0.86; transform: translateY(-1px); }
-      .download-btn:active { transform: translateY(0); }
+      .download-btn:hover {
+        opacity: 0.86;
+        transform: translateY(-1px);
+      }
+      .download-btn:active {
+        transform: translateY(0);
+      }
 
-      /* material icons sizing */
       .ms {
-        font-family: 'Material Symbols Outlined';
+        font-family: "Material Symbols Outlined";
         font-weight: normal;
         font-style: normal;
         font-size: 18px;
@@ -456,17 +496,24 @@ import { translations } from '../lib/i18n';
         white-space: nowrap;
         word-wrap: normal;
         direction: ltr;
-        -webkit-font-feature-settings: 'liga';
-        font-feature-settings: 'liga';
+        -webkit-font-feature-settings: "liga";
+        font-feature-settings: "liga";
         -webkit-font-smoothing: antialiased;
         vertical-align: -4px;
         user-select: none;
         -webkit-user-select: none;
       }
-      .done-msg .ms { font-size: 20px; color: var(--accent); vertical-align: -5px; margin-right: 4px; }
-      .error-msg .ms { font-size: 16px; vertical-align: -3px; margin-right: 4px; }
-
-
+      .done-msg .ms {
+        font-size: 20px;
+        color: var(--accent);
+        vertical-align: -5px;
+        margin-right: 4px;
+      }
+      .error-msg .ms {
+        font-size: 16px;
+        vertical-align: -3px;
+        margin-right: 4px;
+      }
     </style>
   </head>
   <body>
@@ -478,19 +525,33 @@ import { translations } from '../lib/i18n';
           <button class="lang-btn" data-lang="ja" type="button">日本語</button>
         </div>
       </div>
-      <p class="subtitle" data-i18n="subtitle">Drop any image. We compress it to the absolute limit.</p>
+      <p class="subtitle" data-i18n="subtitle">
+        Drop any image. We compress it to the absolute limit.
+      </p>
     </header>
 
     <div class="card">
       <label id="dropzone" class="dropzone" for="fileInput">
-        <svg class="dz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-          <polyline points="8 12 12 8 16 12"/>
-          <line x1="12" y1="8" x2="12" y2="20"/>
+        <svg
+          class="dz-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path>
+          <polyline points="8 12 12 8 16 12"></polyline>
+          <line x1="12" y1="8" x2="12" y2="20"></line>
         </svg>
-        <span class="dz-main" data-i18n="selectFile">Click here or drag &amp; drop an image</span>
-        <span class="dz-hint" data-i18n="uploadHint">PNG · JPEG · GIF · WebP · and more</span>
+        <span class="dz-main" data-i18n="selectFile"
+          >Click here or drag &amp; drop an image</span
+        >
+        <span class="dz-hint" data-i18n="uploadHint"
+          >PNG · JPEG · GIF · WebP · and more</span
+        >
       </label>
       <input type="file" id="fileInput" accept="image/*" />
 
@@ -503,7 +564,8 @@ import { translations } from '../lib/i18n';
       </div>
 
       <div id="errorMsg" class="error-msg" style="display:none">
-        <span class="ms" aria-hidden="true">warning</span><span id="errorText"></span>
+        <span class="ms" aria-hidden="true">warning</span><span id="errorText"
+        ></span>
       </div>
 
       <div id="result" style="display:none; position:relative">
@@ -520,7 +582,9 @@ import { translations } from '../lib/i18n';
         <!-- phase 2: compressing -->
         <div id="phaseCompressing" class="phase">
           <div class="progress-header">
-            <span class="progress-header-label" data-i18n="compressing">Compressing…</span>
+            <span class="progress-header-label" data-i18n="compressing"
+              >Compressing…</span
+            >
             <span id="progressPct">0%</span>
           </div>
           <div class="progress-track">
@@ -552,8 +616,9 @@ import { translations } from '../lib/i18n';
           <div class="chart-row">
             <div class="donut-wrap">
               <svg class="donut-svg" viewBox="0 0 88 88" aria-hidden="true">
-                <circle class="donut-bg"   cx="44" cy="44" r="38"/>
-                <circle id="donutFill" class="donut-fill" cx="44" cy="44" r="38"/>
+                <circle class="donut-bg" cx="44" cy="44" r="38"></circle>
+                <circle id="donutFill" class="donut-fill" cx="44" cy="44" r="38"
+                ></circle>
               </svg>
               <div class="donut-center">
                 <span class="donut-pct">100%</span>
@@ -566,79 +631,86 @@ import { translations } from '../lib/i18n';
                   <span data-i18n="before">Before</span>
                   <strong id="barBeforeLabel">—</strong>
                 </div>
-                <div class="bar-track"><div class="bar-fill" id="barBefore"></div></div>
+                <div class="bar-track">
+                  <div class="bar-fill" id="barBefore"></div>
+                </div>
               </div>
               <div class="bar-row">
                 <div class="bar-meta">
                   <span data-i18n="after">After</span>
                   <strong id="barAfterLabel">0 B</strong>
                 </div>
-                <div class="bar-track"><div class="bar-fill" id="barAfter"></div></div>
+                <div class="bar-track">
+                  <div class="bar-fill" id="barAfter"></div>
+                </div>
               </div>
             </div>
           </div>
 
           <p class="done-msg" id="message">
-            <span class="ms" aria-hidden="true">check_circle</span><span data-i18n="compressed">Compressed 100%!</span>
+            <span class="ms" aria-hidden="true">check_circle</span><span
+              data-i18n="compressed">Compressed 100%!</span
+            >
           </p>
 
           <a id="downloadBtn" class="download-btn" download>
-            <span class="ms" style="font-size:17px;vertical-align:-4px;margin-right:2px" aria-hidden="true">download</span>
+            <span
+              class="ms"
+              style="font-size:17px;vertical-align:-4px;margin-right:2px"
+              aria-hidden="true">download</span
+            >
             <span data-i18n="download">Download compressed file</span>
           </a>
-
-
         </div>
       </div><!-- #result -->
     </div><!-- .card -->
 
     <script is:inline>
-    (function () {
-      var t      = window.__t;
-      var locale = window.__locale;
+      (function () {
+        var t = window.__t;
+        var locale = window.__locale;
 
-      /* ── fmt bytes ── */
-      function fmt(n) {
-        if (n < 1024)    return n + ' B';
-        if (n < 1048576) return (n / 1024).toFixed(1) + ' KB';
-        return (n / 1048576).toFixed(2) + ' MB';
-      }
+        function fmt(n) {
+          if (n < 1024) return n + " B";
+          if (n < 1048576) return (n / 1024).toFixed(1) + " KB";
+          return (n / 1048576).toFixed(2) + " MB";
+        }
 
-      /* ── apply translations ── */
-      function applyT() {
-        document.querySelectorAll('[data-i18n]').forEach(function (el) {
-          var k = el.getAttribute('data-i18n');
-          if (t[k] !== undefined) el.textContent = t[k];
+        function applyT() {
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            var k = el.getAttribute("data-i18n");
+            if (t[k] !== undefined) el.textContent = t[k];
+          });
+          document.title = t.title;
+          document.querySelectorAll(".lang-btn").forEach(function (btn) {
+            var active = btn.getAttribute("data-lang") === locale;
+            btn.setAttribute("aria-pressed", String(active));
+            btn.classList.toggle("active", active);
+          });
+        }
+
+        document.querySelectorAll(".lang-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var l = btn.getAttribute("data-lang");
+            try {
+              localStorage.setItem("act-lang", l);
+            } catch (e) {}
+            window.__locale = l;
+            window.__t = l === "ja" ? window.__ja : window.__en;
+            t = window.__t;
+            locale = l;
+            document.documentElement.lang = l;
+            document.documentElement.setAttribute("data-locale", l);
+            applyT();
+            if (_currentFile) updateSizeLabels(_currentFile.size);
+          });
         });
-        document.title = t.title;
-        document.querySelectorAll('.lang-btn').forEach(function (btn) {
-          var active = btn.getAttribute('data-lang') === locale;
-          btn.setAttribute('aria-pressed', String(active));
-          btn.classList.toggle('active', active);
-        });
-      }
 
-      /* ── lang switch ── */
-      document.querySelectorAll('.lang-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var l = btn.getAttribute('data-lang');
-          try { localStorage.setItem('act-lang', l); } catch (e) {}
-          window.__locale = l;
-          window.__t = l === 'ja' ? window.__ja : window.__en;
-          t = window.__t;
-          locale = l;
-          document.documentElement.lang = l;
-          document.documentElement.setAttribute('data-locale', l);
-          applyT();
-          if (_currentFile) updateSizeLabels(_currentFile.size);
-        });
-      });
+        applyT();
 
-      applyT();
+        var _currentFile = null;
 
-      var _currentFile = null;
-
-      /*
+        /*
         showPhase — zero-flash phase switching
         Pattern:
           1. Hide all phases (display:none).
@@ -650,137 +722,142 @@ import { translations } from '../lib/i18n';
           5. Caller then sets transition + new values → animates.
         This way the element NEVER appears in an intermediate state.
       */
-      function showPhase(id) {
-        /* hide all */
-        ['phaseAnalyzing', 'phaseCompressing', 'phaseDone'].forEach(function (pid) {
-          var el = document.getElementById(pid);
-          el.classList.remove('vis');
-        });
+        function showPhase(id) {
+          ["phaseAnalyzing", "phaseCompressing", "phaseDone"].forEach(
+            function (pid) {
+              var el = document.getElementById(pid);
+              el.classList.remove("vis");
+            },
+          );
 
-        /* reset animated values while hidden */
-        if (id === 'phaseDone') {
-          var df = document.getElementById('donutFill');
-          if (df) { df.style.transition = 'none'; df.style.strokeDashoffset = '239'; }
-          var bb = document.getElementById('barBefore');
-          if (bb) { bb.style.transition = 'none'; bb.style.width = '0'; }
-          var ab = document.getElementById('barAfter');
-          if (ab) { ab.style.transition = 'none'; ab.style.width = '0'; }
-        }
-        if (id === 'phaseCompressing') {
-          var pb = document.getElementById('progressBar');
-          if (pb) { pb.style.transition = 'none'; pb.style.width = '0'; }
-        }
+          if (id === "phaseDone") {
+            var df = document.getElementById("donutFill");
+            if (df) {
+              df.style.transition = "none";
+              df.style.strokeDashoffset = "239";
+            }
+            var bb = document.getElementById("barBefore");
+            if (bb) {
+              bb.style.transition = "none";
+              bb.style.width = "0";
+            }
+            var ab = document.getElementById("barAfter");
+            if (ab) {
+              ab.style.transition = "none";
+              ab.style.width = "0";
+            }
+          }
+          if (id === "phaseCompressing") {
+            var pb = document.getElementById("progressBar");
+            if (pb) {
+              pb.style.transition = "none";
+              pb.style.width = "0";
+            }
+          }
 
-        /* show — reset values are committed as "from" state on next reflow */
-        document.getElementById(id).classList.add('vis');
-      }
-
-      /* force browser to flush pending style changes and commit layout */
-      function forceReflow(el) {
-        void (el || document.body).getBoundingClientRect();
-      }
-
-      /* ── update size labels ── */
-      function updateSizeLabels(bytes) {
-        var sbl = document.getElementById('sizeBeforeLabel');
-        if (sbl) sbl.textContent = fmt(bytes);
-        var bbl = document.getElementById('barBeforeLabel');
-        if (bbl) bbl.textContent = fmt(bytes);
-        var sv  = document.getElementById('savingsVal');
-        if (sv)  sv.textContent = fmt(bytes);
-      }
-
-
-
-      /* ── main file handler ── */
-      function handleFile(file) {
-        _currentFile = file;
-
-        var errorMsg = document.getElementById('errorMsg');
-        errorMsg.style.display = 'none';
-
-        if (!file.type.startsWith('image/')) {
-          document.getElementById('errorText').textContent = t.notSupported;
-          errorMsg.style.display = 'block';
-          document.getElementById('result').style.display = 'none';
-          return;
+          document.getElementById(id).classList.add("vis");
         }
 
-        /* preview */
-        var preview = document.getElementById('filePreview');
-        document.getElementById('previewName').textContent = file.name;
-        document.getElementById('previewType').textContent = file.type + ' · ' + fmt(file.size);
-        document.getElementById('previewImg').src = URL.createObjectURL(file);
-        preview.style.display = 'flex';
+        function forceReflow(el) {
+          void (el || document.body).getBoundingClientRect();
+        }
 
-        /* show result container */
-        document.getElementById('result').style.display = 'block';
+        function updateSizeLabels(bytes) {
+          var sbl = document.getElementById("sizeBeforeLabel");
+          if (sbl) sbl.textContent = fmt(bytes);
+          var bbl = document.getElementById("barBeforeLabel");
+          if (bbl) bbl.textContent = fmt(bytes);
+          var sv = document.getElementById("savingsVal");
+          if (sv) sv.textContent = fmt(bytes);
+        }
 
-        /* — Phase 1: Analyzing — */
-        showPhase('phaseAnalyzing');
+        function handleFile(file) {
+          _currentFile = file;
 
-        /* — Phase 2: Compressing — */
-        setTimeout(function () {
-          showPhase('phaseCompressing');
-          var pctEl = document.getElementById('progressPct');
-          var pb    = document.getElementById('progressBar');
-          pctEl.textContent = '0%';
-          /* commit reset state, then start transition */
-          forceReflow(pb);
-          pb.style.transition = 'width 0.85s cubic-bezier(0.4,0,0.2,1)';
-          pb.style.width = '100%';
-          setTimeout(function () { pctEl.textContent = '100%'; }, 850);
+          var errorMsg = document.getElementById("errorMsg");
+          errorMsg.style.display = "none";
 
-          /* — Phase 3: Done — */
+          if (!file.type.startsWith("image/")) {
+            document.getElementById("errorText").textContent = t.notSupported;
+            errorMsg.style.display = "block";
+            document.getElementById("result").style.display = "none";
+            return;
+          }
+
+          var preview = document.getElementById("filePreview");
+          document.getElementById("previewName").textContent = file.name;
+          document.getElementById("previewType").textContent =
+            file.type + " · " + fmt(file.size);
+          document.getElementById("previewImg").src = URL.createObjectURL(file);
+          preview.style.display = "flex";
+
+          document.getElementById("result").style.display = "block";
+
+          showPhase("phaseAnalyzing");
+
           setTimeout(function () {
-            /* pre-fill size labels before phase is visible */
-            updateSizeLabels(file.size);
+            showPhase("phaseCompressing");
+            var pctEl = document.getElementById("progressPct");
+            var pb = document.getElementById("progressBar");
+            pctEl.textContent = "0%";
 
-            showPhase('phaseDone');
-            applyT(); /* re-apply translations (data-i18n inside phaseDone) */
+            forceReflow(pb);
+            pb.style.transition = "width 0.85s cubic-bezier(0.4,0,0.2,1)";
+            pb.style.width = "100%";
+            setTimeout(function () {
+              pctEl.textContent = "100%";
+            }, 850);
 
-            /* commit reset state, then start chart transitions in one shot */
-            var df2 = document.getElementById('donutFill');
-            var bb2 = document.getElementById('barBefore');
-            forceReflow(document.getElementById('phaseDone'));
-            if (df2) {
-              df2.style.transition = 'stroke-dashoffset 0.85s cubic-bezier(0.4,0,0.2,1)';
-              df2.style.strokeDashoffset = '0';
-            }
-            if (bb2) {
-              bb2.style.transition = 'width 0.85s cubic-bezier(0.4,0,0.2,1)';
-              bb2.style.width = '100%';
-            }
+            setTimeout(function () {
+              updateSizeLabels(file.size);
 
-            /* 0-byte blob download */
-            var blob = new Blob([], { type: file.type });
-            var dl   = document.getElementById('downloadBtn');
-            var rand6 = Math.random().toString(36).slice(2, 8);
-            dl.href     = URL.createObjectURL(blob);
-            dl.download = 'amazing-' + rand6 + '_' + file.name;
+              showPhase("phaseDone");
+              applyT();
 
-          }, 950);
-        }, 480);
-      }
+              var df2 = document.getElementById("donutFill");
+              var bb2 = document.getElementById("barBefore");
+              forceReflow(document.getElementById("phaseDone"));
+              if (df2) {
+                df2.style.transition =
+                  "stroke-dashoffset 0.85s cubic-bezier(0.4,0,0.2,1)";
+                df2.style.strokeDashoffset = "0";
+              }
+              if (bb2) {
+                bb2.style.transition = "width 0.85s cubic-bezier(0.4,0,0.2,1)";
+                bb2.style.width = "100%";
+              }
 
-      /* ── event listeners ── */
-      document.getElementById('fileInput').addEventListener('change', function () {
-        if (this.files && this.files.length) handleFile(this.files[0]);
-        this.value = '';
-      });
+              var blob = new Blob([], { type: file.type });
+              var dl = document.getElementById("downloadBtn");
+              var rand6 = Math.random().toString(36).slice(2, 8);
+              dl.href = URL.createObjectURL(blob);
+              dl.download = "amazing-" + rand6 + "_" + file.name;
+            }, 950);
+          }, 480);
+        }
 
-      var dz = document.getElementById('dropzone');
-      dz.addEventListener('dragover',  function (e) { e.preventDefault(); dz.classList.add('over'); });
-      dz.addEventListener('dragleave', function (e) { if (!dz.contains(e.relatedTarget)) dz.classList.remove('over'); });
-      dz.addEventListener('drop', function (e) {
-        e.preventDefault();
-        dz.classList.remove('over');
-        var files = e.dataTransfer && e.dataTransfer.files;
-        if (files && files.length) handleFile(files[0]);
-      });
+        document
+          .getElementById("fileInput")
+          .addEventListener("change", function () {
+            if (this.files && this.files.length) handleFile(this.files[0]);
+            this.value = "";
+          });
 
-    })();
+        var dz = document.getElementById("dropzone");
+        dz.addEventListener("dragover", function (e) {
+          e.preventDefault();
+          dz.classList.add("over");
+        });
+        dz.addEventListener("dragleave", function (e) {
+          if (!dz.contains(e.relatedTarget)) dz.classList.remove("over");
+        });
+        dz.addEventListener("drop", function (e) {
+          e.preventDefault();
+          dz.classList.remove("over");
+          var files = e.dataTransfer && e.dataTransfer.files;
+          if (files && files.length) handleFile(files[0]);
+        });
+      })();
     </script>
   </body>
 </html>
-

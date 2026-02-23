@@ -1,9 +1,9 @@
 ---
-import { translations } from '../lib/i18n';
-import type { Locale } from '../lib/i18n';
+import { translations } from "../lib/i18n";
+import type { Locale } from "../lib/i18n";
 
-const q = new URL(Astro.request.url).searchParams.get('lang');
-const locale: Locale = q === 'ja' ? 'ja' : 'en';
+const q = new URL(Astro.request.url).searchParams.get("lang");
+const locale: Locale = q === "ja" ? "ja" : "en";
 const t = translations[locale];
 ---
 
@@ -14,9 +14,15 @@ const t = translations[locale];
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>404 — {t.pageNotFound}</title>
     <style>
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
       body {
-        font-family: 'Segoe UI', system-ui, sans-serif;
+        font-family: "Segoe UI", system-ui, sans-serif;
         min-height: 100vh;
         background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         color: #f0f4f8;
@@ -36,9 +42,17 @@ const t = translations[locale];
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
-      h1 { font-size: 1.5rem; margin-top: 1rem; opacity: 0.85; }
-      p  { margin-top: 0.6rem; opacity: 0.55; font-size: 0.95rem; }
-      a  {
+      h1 {
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        opacity: 0.85;
+      }
+      p {
+        margin-top: 0.6rem;
+        opacity: 0.55;
+        font-size: 0.95rem;
+      }
+      a {
         display: inline-block;
         margin-top: 2rem;
         padding: 0.75rem 1.8rem;
@@ -47,9 +61,14 @@ const t = translations[locale];
         font-weight: 700;
         border-radius: 10px;
         text-decoration: none;
-        transition: opacity 0.2s, transform 0.15s;
+        transition:
+          opacity 0.2s,
+          transform 0.15s;
       }
-      a:hover { opacity: 0.9; transform: translateY(-2px); }
+      a:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
     </style>
   </head>
   <body>
