@@ -21,9 +21,15 @@
     } else if (file.type.startsWith("video/")) {
       outExt = "mp4";
       outMime = "video/mp4";
-    } else {
+    } else if (file.type.startsWith("audio/")) {
       outExt = "mp3";
       outMime = "audio/mpeg";
+    } else {
+      return {
+        blob: null,
+        filename: null,
+        outMime: null,
+      };
     }
 
     var baseName = file.name.replace(/\.[^.]+$/, "");

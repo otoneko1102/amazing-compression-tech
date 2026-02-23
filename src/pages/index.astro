@@ -495,6 +495,16 @@ import { translations } from "../lib/i18n";
         letter-spacing: -0.01em;
       }
 
+      .out-filename {
+        font-size: 0.72rem;
+        color: var(--muted);
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        letter-spacing: 0;
+      }
+
       .download-btn {
         display: flex;
         align-items: center;
@@ -767,6 +777,8 @@ import { translations } from "../lib/i18n";
             >
           </p>
 
+          <p id="outFilename" class="out-filename"></p>
+
           <a id="downloadBtn" class="download-btn" download>
             <span
               class="ms"
@@ -879,6 +891,8 @@ import { translations } from "../lib/i18n";
               var dl = document.getElementById("downloadBtn");
               dl.href = URL.createObjectURL(result.blob);
               dl.download = result.filename;
+              var fn = document.getElementById("outFilename");
+              if (fn) fn.textContent = result.filename;
             }, 950);
           }, 480);
         };
