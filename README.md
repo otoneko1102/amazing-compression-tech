@@ -5,7 +5,7 @@
 
 ## ロジック
 
-public/engine.js
+./public/engine.js
 
 ## URL
 
