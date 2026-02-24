@@ -10,7 +10,7 @@ https://otoneko1102.github.io/amazing-compression-tech/
 ## 説明
 
 任意の画像/音声/動画ファイルを0byteまで圧縮。  
-👉 その圧縮率、なんと **「100%」** ！ (驚異のInfinity倍圧縮)
+👈 その圧縮率、なんと **\*\*「100%」\*\*** ！ (驚異のInfinity倍圧縮)
 
 > [!Warning]  
 > 不可逆圧縮だが、無限のサル定理を考えると可逆圧縮かもしれない。  
