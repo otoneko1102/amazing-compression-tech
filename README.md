@@ -3,6 +3,10 @@
 なんと、脅威の圧縮技術。  
 どんなファイルでも100%のサイズ圧縮を実現。
 
+## ロジック
+
+public/engine.js
+
 ## URL
 
 https://otoneko1102.github.io/amazing-compression-tech/
